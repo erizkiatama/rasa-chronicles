@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RaSa Chronicles - About Us</title>
+    <link rel="stylesheet" href="../static/css/about_us.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+</head>
+<body>
+<header>
+    {% load static %}
+    <div class="logo">
+        <h1>RaSa Chronicles</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about_us' %}">About Us</a></li>
+            <li><a href="#collections">Collections</a></li>
+            <!--                <li><a href="#gallery">Gallery</a></li>-->
+            <!--                <li><a href="#contact">Contact</a></li>-->
+        </ul>
+    </nav>
+</header>
+
+<section class="couple-story">
+    <h2>Our Story</h2>
+    <img src="{% static 'images/welcome-image.jpeg' %}" alt="Ezra and Salsa">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. We met during our time at XYZ University, where we both
+        shared a passion for technology and design. Our mutual interests quickly turned into a deep bond, and we decided
+        to combine our skills to create something meaningful together.</p>
+    <p>Since then, we've worked on numerous projects, traveled the world, and continuously inspired each other to grow
+        both personally and professionally. Our journey has been filled with challenges and triumphs, and we are excited
+        to see what the future holds for us.</p>
+</section>
+
+<section class="about">
+    {% for user in users %}
+    <div class="person">
+        <img src="{{ user.photo.url }}" alt="{{user.nickname}}">
+        <h2>{{user.name}}</h2>
+        <p>{{user.description}}</p>
+    </div>
+    {% endfor %}
+</section>
+<footer class="footer">
+    <div class="social-links-container">
+        {% for user in users %}
+        <div class="person-social">
+            {% if user.nickname == 'Ezra' %}
+            <h3>His</h3>
+            {% else %}
+            <h3>Hers</h3>
+            {% endif %}
+
+            <div class="social-links">
+                <a href="{{user.facebook_link}}" class="social-icon" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="{{user.twitter_link}}" class="social-icon" target="_blank">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="{{user.instagram_link}}" class="social-icon" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="copyright">
+        &copy; 2024 Ezra & Salsa. All rights reserved.
+    </div>
+</footer>
+</body>
+</html>

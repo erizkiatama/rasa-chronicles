@@ -1,0 +1,47 @@
+.footer {
+    background-color: #472811;
+    color: #F5E6D3;
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 75px;
+}
+
+.social-links-container {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 30px;
+}
+
+.person-social h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon {
+    color: #F5E6D3;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #D4B08C;
+}
+
+.copyright {
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .social-links-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+}

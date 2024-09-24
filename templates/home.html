@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RaSa Chronicles</title>
+    <link rel="stylesheet" href="../static/css/home.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+</head>
+<body>
+<header>
+    {% load static %}
+    <div class="logo">
+        <h1>RaSa Chronicles</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about_us' %}">About Us</a></li>
+            <li><a href="#collections">Collections</a></li>
+            <!--                <li><a href="#gallery">Gallery</a></li>-->
+            <!--                <li><a href="#contact">Contact</a></li>-->
+        </ul>
+    </nav>
+</header>
+
+<!-- Start of Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h2>Welcome to Our Journey!</h2>
+        <p>We're Ezra & Salsa, a couple sharing our journey through life, love, and shared passions.
+            Here, we share our life together, from the books we read to the places we explore. This is a
+            digital scrapbook of our adventures, collections, and everyday moments. Join us as we document our shared
+            experiences and the little things that make our relationship special.</p>
+    </div>
+    <div class="hero-image">
+        <img src="{% static 'images/welcome-image.jpeg' %}" alt="Ezra & Salsa together">
+    </div>
+</section>
+<!-- End of Hero Section -->
+
+<!-- Start of Our Collections Section -->
+<section id="collections" class="collections">
+    <h2>Our Collections</h2>
+    <div class="collection-grid">
+        <div class="collection-card collection-item">
+            <i class="fas fa-book"></i>
+            <h3>Books</h3>
+            <p>Our favorite reads and literary adventures.</p>
+        </div>
+        <div class="collection-card collection-item">
+            <i class="fas fa-film"></i>
+            <h3>Movies</h3>
+            <p>Films that have captured our hearts.</p>
+        </div>
+        <div class="collection-card collection-item">
+            <i class="fas fa-gamepad"></i>
+            <h3>Games</h3>
+            <p>All games we love to play together.</p>
+        </div>
+    </div>
+</section>
+<!-- End of Our Collections Section-->
+
+<!-- Start of About Us Section -->
+<section id="about" class="about">
+    <h2>About Us</h2>
+    <div class="about-content">
+        {% for user in users %}
+        <div class="person">
+            <img src="{{user.photo.url}}" alt="{{user.nickname}}">
+            <h3>{{user.nickname}}</h3>
+            <p>{{user.short_bio}}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="about-button">
+        <a href="{% url 'about_us' %}" class="button">Read Our Full Story</a>
+    </div>
+</section>
+<!-- End of About Us Section -->
+
+<!-- Start of Footer Section -->
+<footer class="footer">
+    <div class="social-links-container">
+        {% for user in users %}
+        <div class="person-social">
+            <h3>His</h3>
+            <div class="social-links">
+                <a href="{{user.facebook_link}}" class="social-icon" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="{{user.twitter_link}}" class="social-icon" target="_blank">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="{{user.instagram_link}}" class="social-icon" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="copyright">
+        &copy; 2024 Ezra & Salsa. All rights reserved.
+    </div>
+</footer>
+<!-- End of Footer Section-->
+
+<script>
+
+</script>
+</body>
+</html>

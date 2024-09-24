@@ -1,0 +1,96 @@
+@import "base.css";
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F5E6D3;
+    color: #472811;
+}
+
+.header {
+    background-color: #6B3D1A;
+    color: #F5E6D3;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+.couple-story {
+    text-align: center;
+    margin: 20px auto;
+    padding: 30px;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.couple-story h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.couple-story img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.couple-story p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.about {
+    display: flex;
+    justify-content: space-around;
+    padding: 60px 5%;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.person {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    flex: 1;
+    margin: 0 10px 40px;
+}
+
+.person img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.person h2 {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+}
+
+.person p {
+    text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .about {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .person {
+        margin: 20px 0;
+    }
+}
