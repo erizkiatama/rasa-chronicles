@@ -18,7 +18,7 @@
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'about_us' %}">About Us</a></li>
-            <li><a href="#collections">Collections</a></li>
+            <li><a href="{% url 'collection' %}">Collections</a></li>
             <!--                <li><a href="#gallery">Gallery</a></li>-->
             <!--                <li><a href="#contact">Contact</a></li>-->
         </ul>
@@ -44,17 +44,17 @@
 <section id="collections" class="collections">
     <h2>Our Collections</h2>
     <div class="collection-grid">
-        <div class="collection-card collection-item">
+        <div class="collection-card collection-item" data-url="{% url 'collection' %}" data-param="book">
             <i class="fas fa-book"></i>
             <h3>Books</h3>
             <p>Our favorite reads and literary adventures.</p>
         </div>
-        <div class="collection-card collection-item">
+        <div class="collection-card collection-item" data-url="{% url 'collection' %}" data-param="movie">
             <i class="fas fa-film"></i>
             <h3>Movies</h3>
             <p>Films that have captured our hearts.</p>
         </div>
-        <div class="collection-card collection-item">
+        <div class="collection-card collection-item" data-url="{% url 'collection' %}" data-param="game">
             <i class="fas fa-gamepad"></i>
             <h3>Games</h3>
             <p>All games we love to play together.</p>
@@ -108,7 +108,18 @@
 <!-- End of Footer Section-->
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let divs = document.getElementsByClassName('collection-item')
 
+        for (let div of divs) {
+            div.addEventListener('click', () => {
+                let baseUrl = div.getAttribute('data-url');
+                let category = div.getAttribute('data-param');
+
+                window.location.href = baseUrl + '?category=' + encodeURIComponent(category);
+            })
+        }
+    });
 </script>
 </body>
 </html>

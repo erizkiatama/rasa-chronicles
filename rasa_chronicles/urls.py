@@ -5,6 +5,7 @@ from main.views import under_construction
 
 urlpatterns = [
     path("", include("main.urls")),
+    path("collection", include("collection.urls")),
     path("admin/", admin.site.urls),
 ]
 

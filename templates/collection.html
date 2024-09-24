@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RaSa Chronicles - Collections</title>
+    <link rel="stylesheet" href="../static/css/collection.css">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div class="logo">
+            <h1>RaSa Chronicles</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'collection' %}">Collections</a></li>
+                <!--                <li><a href="#gallery">Gallery</a></li>-->
+                <!--                <li><a href="#contact">Contact</a></li>-->
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="filter-section">
+            {% csrf_token %}
+            <h2>FILTER</h2>
+            <form method="get">
+                <div class="filter-group">
+                    <h3>Categories</h3>
+                    {% for x in form.category %}
+                    <div class="filter-option">
+                        {{ x }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="filter-group">
+                    <h3>Owner</h3>
+                    {% for x in form.owner %}
+                    <div class="filter-option">
+                        {{ x }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="filter-submit">Apply Filters</button>
+            </form>
+        </aside>
+        <main class="content">
+            <h2>Collection Items</h2>
+            <div class="collection-grid">
+                {% for collection in collections %}
+                <div class="card">
+                    <img src="{{collection.item.image_url}}" alt="{{collection.item.title}}">
+                    <div class="card-title-container">
+                        <h3 class="card-title">
+                            <i class="category-icon fas fa-{{collection.type}}"></i>
+                            {{collection.item.title}}
+                        </h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-owner">
+                            <i class="owner-icon fas fa-user"></i>
+                            <span>{{collection.item.owner.nickname}}</span>
+                        </div>
+                        <p class="card-genres">
+                            {% for genre in collection.item.genres.all %}
+                            {{ genre.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="social-links-container">
+        {% for user in users %}
+        <div class="person-social">
+            <h3>His</h3>
+            <div class="social-links">
+                <a href="{{user.facebook_link}}" class="social-icon" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="{{user.twitter_link}}" class="social-icon" target="_blank">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+                <a href="{{user.instagram_link}}" class="social-icon" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="copyright">
+        &copy; 2024 Ezra & Salsa. All rights reserved.
+    </div>
+</footer>
+</body>
+</html>
