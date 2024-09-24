@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    networks:
+      - rasa-chronicles-network
+
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_DB_NAME=${DATABASE_NAME}
+      - DJANGO_DB_USER=${DATABASE_USER}
+      - DJANGO_DB_PASSWORD=${DATABASE_PASSWORD}
+      - DJANGO_DB_HOST=${DATABASE_HOST}
+      - DJANGO_DB_PORT=${DATABASE_PORT}
+    networks:
+      - rasa-chronicles-network
+
+volumes:
+  postgres_data:
+
+networks:
+  rasa-chronicles-network:
+    driver: bridge
