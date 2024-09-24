@@ -22,6 +22,7 @@ services:
       - DJANGO_DB_PASSWORD=${DATABASE_PASSWORD}
       - DJANGO_DB_HOST=${DATABASE_HOST}
       - DJANGO_DB_PORT=${DATABASE_PORT}
+      - DJANGO_ALLOWED_HOST=${ALLOWED_HOST}
     networks:
       - rasa-chronicles-network
 
