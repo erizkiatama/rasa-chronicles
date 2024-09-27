@@ -10,8 +10,10 @@ services:
     networks:
       - rasa-chronicles-network
 
-  web:
-    build: .
+  app:
+    build:
+      context: .
+      dockerfile: app.Dockerfile
     ports:
       - "8000:8000"
     depends_on:
@@ -30,6 +32,18 @@ services:
       - DJANGO_APP_ENV=${APP_ENV}
     networks:
       - rasa-chronicles-network
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    ports:
+      - "80:80"
+    depends_on:
+      - app
 
 volumes:
   postgres_data:

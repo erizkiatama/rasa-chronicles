@@ -23,5 +23,11 @@ COPY . .
 # Expose port
 EXPOSE 8000
 
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
+# Run migration files
+RUN python manage.py migrate
+
 # Run the Django development server
-CMD ["sh", "-c", "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn rasa_chronicles.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["sh", "-c", "gunicorn rasa_chronicles.wsgi:application --bind 0.0.0.0:8000"]
