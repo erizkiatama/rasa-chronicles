@@ -6,13 +6,13 @@ from main.models import User
 class Book(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
-    image_url = models.URLField(null=True, blank=True)
+    image_url = models.ImageField(upload_to='collection/static/images/books/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
 
     genres = models.ManyToManyField('Genre')
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'books'
@@ -37,7 +37,7 @@ class Genre(models.Model):
 class BookVolume(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='volumes')
     volume_number = models.IntegerField()
-    cover_image_url = models.URLField(null=True, blank=True)
+    cover_image_url = models.ImageField(upload_to='collection/static/images/bookvolumes/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
@@ -55,7 +55,7 @@ class BookVolume(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     synopsis = models.TextField(null=True, blank=True)
-    image_url = models.URLField(null=True, blank=True)
+    image_url = models.ImageField(upload_to='collection/static/images/movies/')
     release_year = models.IntegerField()
     director = models.CharField(max_length=255)
     esrb_rating = models.CharField(max_length=255)
@@ -78,7 +78,7 @@ class Movie(models.Model):
 class Game(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
-    image_url = models.URLField(null=True, blank=True)
+    image_url = models.ImageField(upload_to='collection/static/images/games/')
     release_date = models.DateField()
     developer = models.CharField(max_length=255)
     publisher = models.CharField(max_length=255)

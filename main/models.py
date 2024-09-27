@@ -4,7 +4,7 @@ from django.db import models
 class User(models.Model):
     name = models.CharField(max_length=50)
     nickname = models.CharField(max_length=15)
-    photo = models.ImageField(upload_to='static/images/')
+    photo = models.ImageField(upload_to='main/static/images/users/')
     short_bio = models.TextField()
     description = models.TextField()
     instagram_link = models.URLField()
