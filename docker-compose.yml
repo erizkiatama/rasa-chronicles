@@ -16,6 +16,9 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    volumes:
+      - .:/app
+      - static_volume:/app/staticfiles
     environment:
       - DJANGO_DB_NAME=${DATABASE_NAME}
       - DJANGO_DB_USER=${DATABASE_USER}
@@ -29,6 +32,7 @@ services:
 
 volumes:
   postgres_data:
+  static_volume:
 
 networks:
   rasa-chronicles-network:
