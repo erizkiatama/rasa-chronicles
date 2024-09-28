@@ -20,9 +20,6 @@ RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --system
 # Copy project
 COPY . .
 
-# Expose port
-EXPOSE 8000
-
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
