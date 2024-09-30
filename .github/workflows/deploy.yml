@@ -10,12 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Build & Deploy
         env:
             PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
             HOSTNAME: ${{secrets.SSH_HOST}}
             USER_NAME: ${{secrets.SSH_USERNAME}}
+            DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+            DATABASE_HOST: ${{secrets.DATABASE_HOST}}
+            DATABASE_PORT: ${{secrets.DATABASE_PORT}}
+            DATABASE_USER: ${{secrets.DATABASE_USER}}
+            DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+            ALLOWED_HOST: ${{secrets.ALLOWED_HOST}}
+            APP_ENV: ${{secrets.APP_ENV}}
 
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
@@ -25,7 +32,7 @@ jobs:
               echo "Starting deployment" &&
               cd rasa-chronicles &&
               docker compose rm -sf app &&
-              docker compose up -d --build app &&
+              docker compose up -d --build --force-recreate app &&
               curl localhost &&
               echo "Deployment complete"
               '
