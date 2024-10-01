@@ -26,13 +26,16 @@ jobs:
 
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          echo "export DATABASE_NAME=$DATABASE_NAME DATABASE_HOST=$DATABASE_HOST DATABASE_PORT=$DATABASE_PORT DATABASE_USER=$DATABASE_USER DATABASE_PASSWORD=$DATABASE_PASSWORD ALLOWED_HOST=$ALLOWED_HOST APP_ENV=$APP_ENV" > env.txt
+          scp -o StrictHostKeyChecking=no -i private_key env.txt ${USER_NAME}@${HOSTNAME}:~/env.txt
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
 
               # Now we have got the access of EC2 and we will start the deploy .
               echo "Starting deployment" &&
               cd rasa-chronicles &&
+              source ~/env.txt &&
               docker compose rm -sf app &&
               docker compose up -d --build --force-recreate app &&
-              curl localhost &&
+              rm ~/env.txt &&
               echo "Deployment complete"
               '
